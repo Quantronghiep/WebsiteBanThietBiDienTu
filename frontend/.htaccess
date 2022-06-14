@@ -1,0 +1,24 @@
+#htaccess : là file nhạy cảm , cú pháp rất khó nhớ
+
+#Rewrite URL
+RewriteEngine On
+
+#Khai báo các rule
+#Rule trang Gior hàng của bạn
+RewriteRule gio-hang-cua-ban.html index.php?controller=cart&action=index
+#
+##Sản phẩm
+#RewriteRule danh-sach-san-pham.html index.php?controller=product&action=showAll
+
+# chi tiết sản phẩm
+#RewriteRule san-pham/([a-z]+)/([0-9]+).html index.php?controller=product&action=detail&id=$2
+RewriteRule san-pham/([a-zA-Z0-9]{1,}[-]{0,})+/([0-9]+).html index.php?controller=product&action=detail&id=$2
+
+#BUổi 37
+#Rule trang xóa sp khỏi giỏ , cần phải sd rule chứa tham số động cho id ,
+#chứ không đc để id tĩnh , cần sd Biểu thức chính quy / Regex để tạo ra tham số động
+RewriteRule xoa-san-pham-mini-cart/([0-9]+).html index.php?controller=cart&action=deleteMiniCart&id=$1
+#RewriteRule xoa-san-pham/([0-9]+)/abc/([0-9]+).html index.php?controller=cart&action=delete&param=$1&param2=$2
+RewriteRule xoa-san-pham/([0-9]+).html index.php?controller=cart&action=delete&id=$1
+
+RewriteRule thanh-toan.html index.php?controller=payment&action=index
